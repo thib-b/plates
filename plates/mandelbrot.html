@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandelbrot Set Plate</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+  <script>
+    function toggleControls() {
+      const controls = document.querySelector('.controls');
+      const toggle = document.querySelector('.controls-toggle');
+      controls.classList.toggle('expanded');
+      toggle.textContent = controls.classList.contains('expanded') ? 'Controls ▲' : 'Controls ▼';
+    }
+  </script>
+  <style>
+    body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Courier New', monospace; }
+    canvas { display: block; z-index: 1; }
+    .controls-toggle {
+      position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.7); padding: 8px 15px;
+      border-radius: 5px; color: #fff; cursor: pointer; font-family: 'Courier New', monospace; font-size: 12px; z-index: 100;
+    }
+    .controls-toggle:hover { background: rgba(74,74,106,0.9); }
+    .controls {
+      position: absolute; top: 55px; left: 20px; background: rgba(0,0,0,0.7); padding: 20px;
+      border-radius: 10px; color: #fff; max-width: 250px;
+    }
+    .controls h2 { margin-top: 0; margin-bottom: 15px; font-size: 14px; border-bottom: 1px solid #444; padding-bottom: 10px; }
+    .controls label { display: block; margin: 10px 0 5px; font-size: 12px; }
+    .controls input { width: 100%; padding: 5px; box-sizing: border-box; }
+    .controls button {
+      width: 100%; padding: 10px; margin-top: 10px; background: #4a4a6a; border: none;
+      border-radius: 5px; color: #fff; cursor: pointer; font-family: 'Courier New', monospace;
+    }
+    .controls button:hover { background: #5a5a7a; }
+    .controls-content { display: none; margin-top: 5px; }
+    .controls.expanded .controls-content { display: block; }
+    .info {
+      position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.7); padding: 15px;
+      border-radius: 10px; color: #fff; font-size: 11px; max-width: 250px;
+    }
+  </style>
+</head>
+<body>
+  <div class="controls-toggle" onclick="toggleControls()">Controls ▼</div>
+  <div class="controls">
+    <div class="controls-content">
+      <h2>Controls</h2>
+      <button id="restart">Restart</button>
+    </div>
+  </div>
+  <div class="info">
+    <p><strong>Mandelbrot Set Plate</strong></p>
+    <p>Fractal visualization of the Mandelbrot set</p>
+    <p>R: Restart / S: Save</p>
+    <p><a href="../index.html" style="color: #1890ff;">← Back to Plates</a></p>
+  </div>
+  <div id="canvas-container"></div>
+  <script src="mandelbrot.js"></script>
+</body>
+</html>

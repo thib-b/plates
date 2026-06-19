@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petri Dish - PixiJS</title>
+    <script src="https://pixijs.download/v7.3.2/pixi.min.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; background: #1a1a2e; font-family: system-ui, sans-serif; }
+        #ui { position: absolute; top: 10px; left: 10px; color: #eee; background: rgba(0,0,0,0.7); padding: 15px; border-radius: 8px; }
+        button { margin: 5px; padding: 8px 12px; cursor: pointer; background: #16213e; color: #fff; border: none; border-radius: 4px; }
+        button:hover { background: #0f3460; }
+        #stats { font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div id="ui">
+        <div><button id="pause">Pause</button><button id="clear">Clear</button></div>
+        <div id="stats">Population: 0 | FPS: 0</div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

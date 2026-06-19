@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reaction-Diffusion Smooth Plate</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.4.2/chroma.min.js"></script>
+  <script>
+    function toggleControls() {
+      const controls = document.querySelector('.controls');
+      const toggle = document.querySelector('.controls-toggle');
+      controls.classList.toggle('expanded');
+      toggle.textContent = controls.classList.contains('expanded') ? 'Controls ▲' : 'Controls ▼';
+    }
+  </script>
+  <style>
+    body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Courier New', monospace; }
+    canvas { display: block; z-index: 1; }
+    .controls-toggle {
+      position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.7); padding: 8px 15px;
+      border-radius: 5px; color: #fff; cursor: pointer; font-family: 'Courier New', monospace; font-size: 12px; z-index: 100;
+    }
+    .controls-toggle:hover { background: rgba(74,74,106,0.9); }
+    .controls {
+      position: absolute; top: 55px; left: 20px; background: rgba(0,0,0,0.7); padding: 20px;
+      border-radius: 10px; color: #fff; max-width: 250px;
+    }
+    .controls h2 { margin-top: 0; margin-bottom: 15px; font-size: 14px; border-bottom: 1px solid #444; padding-bottom: 10px; }
+    .controls label { display: block; margin: 10px 0 5px; font-size: 12px; }
+    .controls input, .controls select { width: 100%; padding: 5px; box-sizing: border-box; }
+    .controls button {
+      width: 100%; padding: 10px; margin-top: 10px; background: #4a4a6a; border: none;
+      border-radius: 5px; color: #fff; cursor: pointer; font-family: 'Courier New', monospace;
+    }
+    .controls button:hover { background: #5a5a7a; }
+    .controls-content { display: none; margin-top: 5px; }
+    .controls.expanded .controls-content { display: block; }
+    .info {
+      position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.7); padding: 15px;
+      border-radius: 10px; color: #fff; font-size: 11px; max-width: 250px;
+    }
+    .drawing-indicator {
+      position: absolute; bottom: 70px; left: 20px; background: rgba(0,0,0,0.7);
+      padding: 10px; border-radius: 5px; color: #fff; font-family: 'Courier New', monospace; font-size: 12px;
+      display: none;
+    }
+    .drawing-indicator.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="controls-toggle" onclick="toggleControls()">Controls ▼</div>
+  <div class="controls">
+    <div class="controls-content">
+      <h2>Reaction-Diffusion Smooth Controls</h2>
+      <label>FPS: <span id="fps">0</span></label>
+      <label>Pattern: <span id="pattern-name">Spots</span></label>
+      <label for="feed-rate">Feed Rate (F): <span id="feed-value">0.055</span></label>
+      <input type="range" id="feed-rate" min="0" max="0.1" value="0.055" step="0.001">
+      <label for="kill-rate">Kill Rate (K): <span id="kill-value">0.062</span></label>
+      <input type="range" id="kill-rate" min="0" max="0.1" value="0.062" step="0.001">
+      <label for="diffusion-u">Diffusion U (Du): <span id="du-value">0.16</span></label>
+      <input type="range" id="diffusion-u" min="0" max="0.5" value="0.16" step="0.01">
+      <label for="diffusion-v">Diffusion V (Dv): <span id="dv-value">0.08</span></label>
+      <input type="range" id="diffusion-v" min="0" max="0.5" value="0.08" step="0.01">
+      <label for="color-scheme">Color Scheme:</label>
+      <select id="color-scheme">
+        <option value="viridis">Viridis</option><option value="plasma">Plasma</option>
+        <option value="inferno">Inferno</option><option value="magma">Magma</option>
+        <option value="cividis">Cividis</option><option value="turbo">Turbo</option>
+        <option value="rainbow">Rainbow</option><option value="cool">Cool</option>
+        <option value="hot">Hot</option>
+      </select>
+      <button id="reset-btn">Reset Simulation</button>
+      <button id="randomize-btn">Randomize Parameters</button>
+    </div>
+  </div>
+  <div class="info">
+    <p><strong>Reaction-Diffusion Smooth Plate</strong></p>
+    <p>Gray-Scott model - High-resolution with no visible grid</p>
+    <p>SPACE: pause / R: reset / S: save / D: toggle pencil</p>
+    <p><a href="../index.html" style="color: #1890ff;">← Back to Plates</a></p>
+  </div>
+  <div class="drawing-indicator" id="drawing-indicator">Pencil Mode: ON (draw on plate)</div>
+  <div id="canvas-container"></div>
+  <script src="reaction_diffusion_smooth.js"></script>
+</body>
+</html>

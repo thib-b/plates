@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test ZIM</title>
+    <script src="https://zimjs.org/cdn/1.3.2/createjs.js?v=1"></script>
+    <script src="https://zimjs.org/cdn/cat/01/zim.js?v=1"></script>
+    <style>body { margin: 0; background: #000; }</style>
+</head>
+<body>
+    <script>
+        // Simple test - create a Frame and add a Circle
+        var frame = new Frame("fit", 800, 600, "#111", "#000");
+        frame.on("ready", function() {
+            var stage = frame.stage;
+            var circle = new Circle(50, "#FF0000").center().addTo(stage);
+            console.log("ZIM working!");
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test PixiJS</title>
+    <script src="https://pixijs.download/v7.3.2/pixi.min.js"></script>
+    <style>body { margin: 0; background: #000; }</style>
+</head>
+<body>
+    <script>
+        const app = new PIXI.Application({ width: 800, height: 600, backgroundColor: 0x111111 });
+        document.body.appendChild(app.view);
+        
+        const circle = new PIXI.Graphics();
+        circle.beginFill(0xFF0000);
+        circle.drawCircle(400, 300, 50);
+        circle.endFill();
+        app.stage.addChild(circle);
+        
+        console.log("PixiJS working!");
+    </script>
+</body>
+</html>
